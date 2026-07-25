@@ -1,0 +1,141 @@
+:root {
+    --mf-primary: #1e8a4c;
+    --mf-primary-dark: #146339;
+    --mf-accent: #ff9f1c;
+    --mf-bg: #f4f7f4;
+    --mf-sidebar-w: 230px;
+}
+
+body {
+    background: var(--mf-bg);
+    font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+#sidebar {
+    width: var(--mf-sidebar-w);
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--mf-primary-dark), var(--mf-primary));
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1030;
+    transition: margin-left .25s ease;
+    overflow-y: auto;
+}
+#sidebar .brand {
+    padding: 1.1rem 1rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+#sidebar .nav-link {
+    color: rgba(255,255,255,.85);
+    padding: .65rem 1.1rem;
+    font-size: .92rem;
+    border-left: 3px solid transparent;
+}
+#sidebar .nav-link i { width: 20px; display: inline-block; }
+#sidebar .nav-link:hover, #sidebar .nav-link.active {
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    border-left-color: var(--mf-accent);
+}
+#sidebar .nav-heading {
+    color: rgba(255,255,255,.5);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: .8rem 1.1rem .2rem;
+}
+
+/* ===== CONTENT WRAPPER ===== */
+#content-wrapper {
+    margin-left: var(--mf-sidebar-w);
+    min-height: 100vh;
+    transition: margin-left .25s ease;
+    display: flex;
+    flex-direction: column;
+}
+#topbar {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    padding: .6rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+#page-content { padding: 1.25rem; flex: 1; width: 100%; }
+
+.card { border: none; border-radius: .6rem; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.card-header { background: #fff; border-bottom: 1px solid #eef1ee; font-weight: 600; border-radius: .6rem .6rem 0 0 !important; }
+
+.btn-mf { background: var(--mf-primary); border-color: var(--mf-primary); color: #fff; }
+.btn-mf:hover { background: var(--mf-primary-dark); border-color: var(--mf-primary-dark); color: #fff; }
+.text-mf { color: var(--mf-primary) !important; }
+.bg-mf { background: var(--mf-primary) !important; }
+
+.stat-card { border-radius: .6rem; color: #fff; padding: 1.1rem; }
+.stat-card .stat-value { font-size: 1.5rem; font-weight: 700; }
+.stat-card .stat-label { font-size: .8rem; opacity: .9; }
+
+/* ===== LOGIN ===== */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--mf-primary-dark), var(--mf-primary));
+}
+.login-card { max-width: 400px; width: 100%; border-radius: .8rem; overflow: hidden; }
+
+/* ===== POS / KASIR ===== */
+.produk-grid { max-height: 62vh; overflow-y: auto; }
+.produk-item {
+    cursor: pointer;
+    border-radius: .5rem;
+    transition: transform .1s;
+    height: 100%;
+}
+.produk-item:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+.produk-item .p-nama { font-size: .82rem; font-weight: 600; min-height: 2.2em; }
+.produk-item .p-harga { font-size: .8rem; color: var(--mf-primary); font-weight: 700; }
+.produk-item .p-stok { font-size: .7rem; color: #888; }
+.cart-box { max-height: 42vh; overflow-y: auto; }
+.cart-row { font-size: .85rem; border-bottom: 1px solid #f0f0f0; padding: .4rem 0; }
+.qty-input { width: 55px; text-align: center; }
+
+/* ===== STRUK THERMAL ===== */
+.struk { width: 280px; font-family: 'Courier New', monospace; font-size: 12px; margin: 0 auto; }
+.struk hr { border-top: 1px dashed #000; }
+@media print {
+    body * { visibility: hidden; }
+    .struk, .struk * { visibility: visible; }
+    .struk { position: absolute; top: 0; left: 0; width: 280px; }
+}
+
+/* ===== RESPONSIVE / MOBILE (Samsung A17, dsb) ===== */
+@media (max-width: 991.98px) {
+    #sidebar { margin-left: calc(-1 * var(--mf-sidebar-w)); }
+    #sidebar.show { margin-left: 0; box-shadow: 4px 0 15px rgba(0,0,0,.2); }
+    #content-wrapper { margin-left: 0; }
+    .sidebar-backdrop {
+        display: none;
+        position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 1025;
+    }
+    .sidebar-backdrop.show { display: block; }
+}
+@media (max-width: 575.98px) {
+    #page-content { padding: .75rem; }
+    .stat-card .stat-value { font-size: 1.2rem; }
+    .produk-item .p-nama { font-size: .75rem; }
+    table.table-responsive-font { font-size: .8rem; }
+}
+
+.table thead th { font-size: .78rem; text-transform: uppercase; color: #666; border-top: none; }
+.badge-stok-rendah { background: #ffe3e3; color: #c0392b; }
